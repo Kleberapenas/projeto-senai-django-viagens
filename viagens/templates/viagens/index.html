@@ -3,49 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Viagens muldanas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+        
+    </script>
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
+    {% extends "viagens/base.html" %}
+    {% block title %}Home - Index viagens{% endblock %}
 
-    <!-- Header -->
-    <header class="bg-green-600 text-white py-6 shadow-md">
-        <div class="max-w-5xl mx-auto px-4">
-            <h1 class="text-4xl font-extrabold">viagens a locais do dia a dia</h1>
-        </div>
-    </header>
-
+    {% block content %}
     <!-- Conteúdo principal -->
-    <main class="flex-grow">
-        <div class="max-w-5xl mx-auto px-4 py-8">
-            <!-- Barra de busca -->
-            <form method="get" class="mb-6">
-                <input type="text" name="q" placeholder="Buscar fotos..."
-                       class="border border-gray-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-                       value="{{ request.GET.q }}">
-            </form>
+        <main class="flex-grow">
+            <div class="max-w-5xl mx-auto px-4 py-8">
+                <!-- Barra de busca -->
+                <form method="get" class="mb-6 flex flex-row" id="form-busca">
+                    <input type="text" name="q" id="campo-busca" placeholder="Buscar fotos..."
+                           class="border border-gray-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                           value="{{ request.GET.q }}">
+                    <button class="bg-green-500 text-white px-4 py-3 rounded hover:bg-green-600 transition" type="button" onclick="limparBusca()">
+                        Limpar
+                    </button>
+                </form>
+                <script>
+                    function limparBusca() {
+                        document.getElementById('campo-busca').value = '';
+                        document.getElementById('form-busca').submit();
+                    }
+                </script>
 
-            <!-- Grid de fotos -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                {% for foto in fotos %}
-                    <a href="{% url 'detalhe_foto' foto.id %}"
-                       class="block bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition duration-300">
-                        <img src="{{ foto.imagem.url }}" alt="{{ foto.titulo }}" class="w-full h-48 object-cover rounded-md">
-                        <h2 class="text-xl font-semibold mt-3">{{ foto.titulo }}</h2>
-                        <p class="text-gray-500 text-sm">{{ foto.local }}</p>
-                    </a>
-                {% empty %}
-                    <p>Nenhuma foto encontrada.</p>
-                {% endfor %}
+                <!-- Grid de fotos -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                    {% for foto in fotos %}
+                        <a href="{% url 'detalhe_foto' foto.id %}"
+                           class="block bg-white p-3 rounded-lg border border-gray-200 shadow-sm hover:shadow-xl hover:border-blue-400 transition duration-300">
+                            <img src="{{ foto.imagem.url }}" alt="{{ foto.titulo }}" class="w-full h-48 object-cover rounded-md">
+                            <h2 class="text-xl font-semibold mt-3">{{ foto.titulo }}</h2>
+                            <p class="text-gray-500 text-sm">{{ foto.local }}</p>
+                        </a>
+                    {% empty %}
+                        <p>Nenhuma foto encontrada.</p>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-100 py-4">
-        <div class="max-w-5xl mx-auto text-center text-sm">
-            &copy; {{ now|date:"Y" }} Galeria de Viagens de Kleber.
-        </div>
-    </footer>
+        </main>
+    {% endblock %}
 
 </body>
 </html>

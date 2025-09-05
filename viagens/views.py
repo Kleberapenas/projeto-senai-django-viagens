@@ -3,7 +3,7 @@ from .models import Foto
 from django.db.models import Q
 
 def index(request):
-    busca = request.GET.get('q')
+    busca = request.GET.get('q','')
     if busca:
         fotos = Foto.objects.filter(
             Q(titulo__icontains=busca) | Q(descricao__icontains=busca)
