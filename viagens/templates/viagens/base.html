@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Minhas Viagens{% endblock %}</title>
-    <script scr="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
-    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Viagens Normais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Inter',sans-serif;
@@ -15,8 +14,13 @@
 </head>
 <body class="bg-gray-100 flex flex-col min-h-screen">
     <header class="bg-green-600 text-white py-6 shadow-md">
-        <div class="max-w-5xl mx-auto px-4">
-            <h1 class="text-4xl font-extrabold">viagens a locais normais</h1>
+        <div class="max-w-5xl mx-auto px-4  flex-col flex items-center">
+        <h1 class="text-4xl font-extrabold">viagens a locais normais</h1>
+        <nav class="relative z-10 flex space-x-4">
+            <a href="{% url 'sobre_nos' %}" class="text-gray-300 hover:text-white">Sobre Nós</a>
+            <a href="{% url 'index' %}" class="text-gray-300 hover:text-white">Home</a>
+            <a href="{% url 'contato' %}" class="text-gray-300 hover:text-white">Contato</a>
+        </nav>
         </div>
     </header>
     <main class="flex-grow">
